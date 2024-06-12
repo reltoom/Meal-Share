@@ -1,6 +1,6 @@
 import { rest } from "msw";
 
-const baseURL = "https://drf-api-rec.herokuapp.com/";
+const baseURL = "https://df-api-runthrough-71a53f6c5df9.herokuapp.com/";
 
 export const handlers = [
   rest.get(`${baseURL}dj-rest-auth/user/`, (req, res, ctx) => {
