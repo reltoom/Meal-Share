@@ -135,17 +135,16 @@ const Post = (props) => {
           {comments_count}
         </div>
         {/* Ingredients Dropdown */}
-        {ingredients && (
+        {ingredients && ingredients.length > 0 && (
           <div className={styles.IngredientsDropdown}>
             <button className={styles.ToggleButton} onClick={toggleIngredients}>
-              {showIngredients ? "Hide Ingredients" : "Show Ingredients"}
+              {showIngredients ? 'Hide Ingredients' : 'Show Ingredients'}
             </button>
             {showIngredients && (
               <ul className={styles.IngredientsList}>
                 {ingredients.map((ingredient, index) => (
                   <li key={index}>
-                    {ingredient.name}: {ingredient.quantity}{" "}
-                    {ingredient.measurement}
+                    {ingredient.name}: {ingredient.quantity} {ingredient.measurement}
                   </li>
                 ))}
               </ul>

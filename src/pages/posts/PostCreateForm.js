@@ -96,7 +96,7 @@ function PostCreateForm() {
       history.push(`/posts/${data.id}`);
     } catch (err) {
       // console.log(err);
-      if (err.response?.status !== 401) {
+      if (err.response?.status !== 400) {
         setErrors(err.response?.data);
       }
     }
@@ -113,7 +113,7 @@ function PostCreateForm() {
           onChange={handleChange}
         />
       </Form.Group>
-      {errors?.title?.map((message, idx) => (
+      {errors?.recipe_name?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>

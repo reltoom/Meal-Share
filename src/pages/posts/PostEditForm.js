@@ -19,11 +19,11 @@ function PostEditForm() {
   const [errors, setErrors] = useState({});
 
   const [postData, setPostData] = useState({
-    title: "",
+    recipe_name: "",
     content: "",
     image: "",
   });
-  const { title, content, image } = postData;
+  const { recipe_name, content, image } = postData;
 
   const imageInput = useRef(null);
   const history = useHistory();
@@ -33,9 +33,9 @@ function PostEditForm() {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(`/posts/${id}/`);
-        const { title, content, image, is_owner } = data;
+        const { recipe_name, content, image, is_owner } = data;
 
-        is_owner ? setPostData({ title, content, image }) : history.push("/");
+        is_owner ? setPostData({ recipe_name, content, image }) : history.push("/");
       } catch (err) {
         // console.log(err);
       }
@@ -65,7 +65,7 @@ function PostEditForm() {
     event.preventDefault();
     const formData = new FormData();
 
-    formData.append("title", title);
+    formData.append("recipe_name", recipe_name);
     formData.append("content", content);
 
     if (imageInput?.current?.files[0]) {
@@ -86,15 +86,15 @@ function PostEditForm() {
   const textFields = (
     <div className="text-center">
       <Form.Group>
-        <Form.Label>Title</Form.Label>
+        <Form.Label>Recipe Name</Form.Label>
         <Form.Control
           type="text"
-          name="title"
-          value={title}
+          name="recipe_name"
+          value={recipe_name}
           onChange={handleChange}
         />
       </Form.Group>
-      {errors?.title?.map((message, idx) => (
+      {errors?.recipe_name?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
