@@ -34,6 +34,7 @@ function PostCreateForm() {
   const imageInput = useRef(null);
   const history = useHistory();
 
+
   const handleChange = (event) => {
     setPostData({
       ...postData,
@@ -79,25 +80,30 @@ function PostCreateForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData();
-
+  
+    // Create FormData object for handling file upload
+    let formData = new FormData();
+    formData.append('image', imageInput.current.files[0]); // Append selected file from input
     formData.append("recipe_name", recipe_name);
     formData.append("content", content);
     formData.append("image", imageInput.current.files[0]);
-
-    ingredients.forEach((ingredient, index) => {
-      formData.append(`ingredients[${index}][name]`, ingredient.name);
-      formData.append(`ingredients[${index}][quantity]`, ingredient.quantity);
-      formData.append(`ingredients[${index}][measurement]`, ingredient.measurement);
-    });
-
+    // Prepare dataToSend for other form fields
+    let dataToSend = {
+      ingredients
+    };
+  
     try {
-      const { data } = await axiosReq.post("/posts/", formData);
+      const { data } = await axiosReq.post("/posts/", formData, {
+        params: dataToSend  // Send dataToSend as query params if needed
+      });
       history.push(`/posts/${data.id}`);
     } catch (err) {
-      // console.log(err);
-      if (err.response?.status !== 400) {
+      if (err.response?.status === 400) {
+        // Handle validation errors from backend
         setErrors(err.response?.data);
+      } else {
+        // Handle other errors
+        console.error("Error creating post:", err);
       }
     }
   };
