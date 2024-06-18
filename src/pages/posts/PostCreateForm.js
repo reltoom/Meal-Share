@@ -21,6 +21,7 @@ import { useRedirect } from "../../hooks/useRedirect";
 
 function PostCreateForm() {
   useRedirect("loggedOut");
+
   const [errors, setErrors] = useState({});
   const [postData, setPostData] = useState({
     recipe_name: "",
@@ -51,7 +52,7 @@ function PostCreateForm() {
   };
 
   const handleAddIngredient = () => {
-    const newIngredient = {name: '', quantity: '', measurement: ''};
+    const newIngredient = { name: '', quantity: '', measurement: ''};
     setPostData({
       ...postData,
       ingredients: [...ingredients, newIngredient],
@@ -167,13 +168,29 @@ function PostCreateForm() {
         />
       </Form.Group>
       <Form.Group>
-        <Form.Control
-          type="text"
+      <Form.Control
+          as="select"
           name="measurement"
           value={ingredient.measurement}
           onChange={(e) => handleIngredientChange(index, e)}
-          placeholder="Measurement"
-        />
+        >
+          <option value="">Select Measurement</option>
+          <option value="milliliter - ml">Milliliter - ml</option>
+          <option value="deciliter - dl">Deciliter - dl</option>
+          <option value="litre - l">Litre - l</option>
+          <option value="teaspoon - tsp">Teaspoon - tsp</option>
+          <option value="tablespoon - tbsp">Tablespoon - tbsp</option>
+          <option value="fluid ounce - fl oz">Fluid Ounce - fl oz</option>
+          <option value="cup - c">Cup - c</option>
+          <option value="pint - pt">Pint - pt</option>
+          <option value="quart - qt">Quart - qt</option>
+          <option value="gallon - gal">Gallon - gal</option>
+          <option value="milligram - mg">Milligram - mg</option>
+          <option value="gram - g">Gram - g</option>
+          <option value="kilogram - kg">Kilogram - kg</option>
+          <option value="pound - lb">Pound - lb</option>
+          <option value="ounce - oz">Ounce - oz</option>
+        </Form.Control>
       </Form.Group>
       <Button
         variant="danger"
