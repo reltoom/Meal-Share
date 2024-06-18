@@ -9,7 +9,6 @@ import Alert from "react-bootstrap/Alert";
 import Image from "react-bootstrap/Image";
 
 import Asset from "../../components/Asset";
-
 import Upload from "../../assets/upload.png";
 
 import styles from "../../styles/PostCreateEditForm.module.css";
@@ -23,14 +22,14 @@ import { useRedirect } from "../../hooks/useRedirect";
 function PostCreateForm() {
   useRedirect("loggedOut");
   const [errors, setErrors] = useState({});
-
   const [postData, setPostData] = useState({
-    title: "",
+    recipe_name: "",
     content: "",
     image: "",
+    ingredients: [],
   });
-  const { title, content, image } = postData;
 
+  const { recipe_name, content, image, ingredients } = postData;
   const imageInput = useRef(null);
   const history = useHistory();
 
@@ -51,13 +50,45 @@ function PostCreateForm() {
     }
   };
 
+  const handleAddIngredient = () => {
+    const newIngredient = {name: '', quantity: '', measurement: ''};
+    setPostData({
+      ...postData,
+      ingredients: [...ingredients, newIngredient],
+    });
+  };
+
+  const handleIngredientChange = (index, event) => {
+    const updatedIngredients = [...ingredients];
+    updatedIngredients[index][event.target.name] = event.target.value;
+    setPostData({
+      ...postData,
+      ingredients: updatedIngredients,
+    });
+  };
+
+  const handleRemoveIngredient = (index) => {
+    const updatedIngredients= [...ingredients];
+    updatedIngredients.splice(index, 1);
+    setPostData({
+      ...postData,
+      ingredients: updatedIngredients,
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
 
-    formData.append("title", title);
+    formData.append("recipe_name", recipe_name);
     formData.append("content", content);
     formData.append("image", imageInput.current.files[0]);
+
+    ingredients.forEach((ingredient, index) => {
+      formData.append(`ingredients[${index}][name]`, ingredient.name);
+      formData.append(`ingredients[${index}][quantity]`, ingredient.quantity);
+      formData.append(`ingredients[${index}][measurement]`, ingredient.measurement);
+    });
 
     try {
       const { data } = await axiosReq.post("/posts/", formData);
@@ -73,11 +104,11 @@ function PostCreateForm() {
   const textFields = (
     <div className="text-center">
       <Form.Group>
-        <Form.Label>Title</Form.Label>
+        <Form.Label>Recipe Name</Form.Label>
         <Form.Control
           type="text"
-          name="title"
-          value={title}
+          name="recipe_name"
+          value={recipe_name}
           onChange={handleChange}
         />
       </Form.Group>
@@ -110,10 +141,49 @@ function PostCreateForm() {
         cancel
       </Button>
       <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
-        create
+        Create
       </Button>
     </div>
   );
+
+  const ingredientsFields = ingredients.map((ingredient, index) => (
+    <div key={index} className={styles.IngredientRow}>
+      <Form.Group>
+        <Form.Control
+          type="text"
+          name="name"
+          value={ingredient.name}
+          onChange={(e) => handleIngredientChange(index, e)}
+          placeholder="Ingredient Name"
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.Control
+          type="text"
+          name="quantity"
+          value={ingredient.quantity}
+          onChange={(e) => handleIngredientChange(index, e)}
+          placeholder="Quantity"
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.Control
+          type="text"
+          name="measurement"
+          value={ingredient.measurement}
+          onChange={(e) => handleIngredientChange(index, e)}
+          placeholder="Measurement"
+        />
+      </Form.Group>
+      <Button
+        variant="danger"
+        onClick={() => handleRemoveIngredient(index)}
+        className={styles.RemoveIngredientButton}
+      >
+        Remove
+      </Button>
+    </div>
+  ));
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -166,7 +236,18 @@ function PostCreateForm() {
           </Container>
         </Col>
         <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
-          <Container className={appStyles.Content}>{textFields}</Container>
+          <Container className={appStyles.Content}>
+            {textFields}
+            <hr />
+            <h5 className="text-center">Ingredients</h5>
+            {ingredientsFields}
+            <Button
+              className={`${btnStyles.Button} ${btnStyles.Blue}`}
+              onClick={handleAddIngredient}
+            > 
+              Add Ingredient
+            </Button>
+          </Container>
         </Col>
       </Row>
     </Form>
