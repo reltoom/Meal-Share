@@ -22,3 +22,15 @@
   .HeartOutline:hover {
     color: #f85032;
   }
+
+  .IngredientsDropdown{
+    color:aqua;
+  }
+
+  .ToggleButton {
+    color:aqua;
+  }
+
+  IngredientsList {
+    color:aqua;
+  }

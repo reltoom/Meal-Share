@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from 'react';
 import styles from "../../styles/Post.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
@@ -16,7 +16,8 @@ const Post = (props) => {
     comments_count,
     likes_count,
     like_id,
-    title,
+    recipe_name,
+    ingredients,
     content,
     image,
     updated_at,
@@ -27,6 +28,7 @@ const Post = (props) => {
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
+  const [showIngredients, setShowIngredients] = useState(false);
 
   const handleEdit = () => {
     history.push(`/posts/${id}/edit`);
@@ -73,6 +75,10 @@ const Post = (props) => {
     }
   };
 
+  const toggleIngredients = () => {
+    setShowIngredients(!showIngredients);
+  }
+
   return (
     <Card className={styles.Post}>
       <Card.Body>
@@ -93,10 +99,10 @@ const Post = (props) => {
         </Media>
       </Card.Body>
       <Link to={`/posts/${id}`}>
-        <Card.Img src={image} alt={title} />
+        <Card.Img src={image} alt={recipe_name} />
       </Link>
       <Card.Body>
-        {title && <Card.Title className="text-center">{title}</Card.Title>}
+        {recipe_name && <Card.Title className="text-center">{recipe_name}</Card.Title>}
         {content && <Card.Text>{content}</Card.Text>}
         <div className={styles.PostBar}>
           {is_owner ? (
@@ -128,6 +134,24 @@ const Post = (props) => {
           </Link>
           {comments_count}
         </div>
+        {/* Ingredients Dropdown */}
+        {ingredients && (
+          <div className={styles.IngredientsDropdown}>
+            <button className={styles.ToggleButton} onClick={toggleIngredients}>
+              {showIngredients ? "Hide Ingredients" : "Show Ingredients"}
+            </button>
+            {showIngredients && (
+              <ul className={styles.IngredientsList}>
+                {ingredients.map((ingredient, index) => (
+                  <li key={index}>
+                    {ingredient.name}: {ingredient.quantity}{" "}
+                    {ingredient.measurement}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
       </Card.Body>
     </Card>
   );
