@@ -39,7 +39,7 @@ const Post = (props) => {
       await axiosRes.delete(`/posts/${id}/`);
       history.goBack();
     } catch (err) {
-      // console.log(err);
+      console.error("Error deleting post:", err);
     }
   };
 
@@ -55,7 +55,7 @@ const Post = (props) => {
         }),
       }));
     } catch (err) {
-      // console.log(err);
+      console.error("Error liking post:", err);
     }
   };
 
@@ -71,13 +71,13 @@ const Post = (props) => {
         }),
       }));
     } catch (err) {
-      // console.log(err);
+      console.error("Error unliking post:", err);
     }
   };
 
   const toggleIngredients = () => {
     setShowIngredients(!showIngredients);
-  }
+  };
 
   return (
     <Card className={styles.Post}>
@@ -104,6 +104,25 @@ const Post = (props) => {
       <Card.Body>
         {recipe_name && <Card.Title className="text-center">{recipe_name}</Card.Title>}
         {content && <Card.Text>{content}</Card.Text>}
+
+        {/* Ingredients Dropdown */}
+        {ingredients && ingredients.length > 0 && (
+          <div className={styles.IngredientsDropdown}>
+            <button className={styles.ToggleButton} onClick={toggleIngredients}>
+              {showIngredients ? 'Hide Ingredients' : 'Show Ingredients'}
+            </button>
+            {showIngredients && (
+              <ul className={styles.IngredientsList}>
+                {ingredients.map((ingredient, index) => (
+                  <li key={index}>
+                    {ingredient.name}: {ingredient.quantity} {ingredient.measurement}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
+
         <div className={styles.PostBar}>
           {is_owner ? (
             <OverlayTrigger
@@ -134,23 +153,6 @@ const Post = (props) => {
           </Link>
           {comments_count}
         </div>
-        {/* Ingredients Dropdown */}
-        {ingredients && ingredients.length > 0 && (
-          <div className={styles.IngredientsDropdown}>
-            <button className={styles.ToggleButton} onClick={toggleIngredients}>
-              {showIngredients ? 'Hide Ingredients' : 'Show Ingredients'}
-            </button>
-            {showIngredients && (
-              <ul className={styles.IngredientsList}>
-                {ingredients.map((ingredient, index) => (
-                  <li key={index}>
-                    {ingredient.name}: {ingredient.quantity} {ingredient.measurement}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        )}
       </Card.Body>
     </Card>
   );

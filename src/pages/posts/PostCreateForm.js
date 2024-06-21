@@ -83,19 +83,13 @@ function PostCreateForm() {
   
     // Create FormData object for handling file upload
     let formData = new FormData();
-    formData.append('image', imageInput.current.files[0]); // Append selected file from input
     formData.append("recipe_name", recipe_name);
     formData.append("content", content);
     formData.append("image", imageInput.current.files[0]);
-    // Prepare dataToSend for other form fields
-    let dataToSend = {
-      ingredients
-    };
-  
+    formData.append("ingredients", JSON.stringify(ingredients)); // Ensure ingredients are stringified
+    
     try {
-      const { data } = await axiosReq.post("/posts/", formData, {
-        params: dataToSend  // Send dataToSend as query params if needed
-      });
+      const { data } = await axiosReq.post("/posts/", formData);
       history.push(`/posts/${data.id}`);
     } catch (err) {
       if (err.response?.status === 400) {
