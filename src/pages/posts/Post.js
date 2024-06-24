@@ -30,6 +30,9 @@ const Post = (props) => {
   const history = useHistory();
   const [showIngredients, setShowIngredients] = useState(false);
 
+  console.log('RECIPE: ', recipe_name)
+  console.log('PROPS: ', props)
+
   const handleEdit = () => {
     history.push(`/posts/${id}/edit`);
   };
@@ -77,6 +80,7 @@ const Post = (props) => {
 
   const toggleIngredients = () => {
     setShowIngredients(!showIngredients);
+    console.log('INGREDIENTS: ', showIngredients)
   };
 
   return (
