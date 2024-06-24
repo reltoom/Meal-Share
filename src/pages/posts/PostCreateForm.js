@@ -25,12 +25,12 @@ function PostCreateForm() {
   const [errors, setErrors] = useState({});
   const [postData, setPostData] = useState({
     recipe_name: "",
-    content: "",
+    description: "",
     image: "",
     ingredients: [],
   });
 
-  const { recipe_name, content, image, ingredients } = postData;
+  const { recipe_name, description, image, ingredients } = postData;
   const imageInput = useRef(null);
   const history = useHistory();
 
@@ -82,9 +82,9 @@ function PostCreateForm() {
     event.preventDefault();
   
     // Create FormData object for handling file upload
-    let formData = new FormData();
+    const formData = new FormData();
     formData.append("recipe_name", recipe_name);
-    formData.append("content", content);
+    formData.append("description", description);
     formData.append("image", imageInput.current.files[0]);
     formData.append("ingredients", JSON.stringify(ingredients)); // Ensure ingredients are stringified
     
@@ -120,12 +120,12 @@ function PostCreateForm() {
       ))}
 
       <Form.Group>
-        <Form.Label>Content</Form.Label>
+        <Form.Label>Description</Form.Label>
         <Form.Control
           as="textarea"
           rows={6}
-          name="content"
-          value={content}
+          name="description"
+          value={description}
           onChange={handleChange}
         />
       </Form.Group>

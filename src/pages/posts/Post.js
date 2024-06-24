@@ -18,7 +18,7 @@ const Post = (props) => {
     like_id,
     recipe_name,
     ingredients,
-    content,
+    description,
     image,
     updated_at,
     postPage,
@@ -103,7 +103,7 @@ const Post = (props) => {
       </Link>
       <Card.Body>
         {recipe_name && <Card.Title className="text-center">{recipe_name}</Card.Title>}
-        {content && <Card.Text>{content}</Card.Text>}
+        {description && <Card.Text>{description}</Card.Text>}
 
         {/* Ingredients Dropdown */}
         {ingredients && ingredients.length > 0 && (
