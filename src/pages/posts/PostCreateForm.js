@@ -102,51 +102,6 @@ function PostCreateForm() {
     }
   };
 
-  const textFields = (
-    <div className="text-center">
-      <Form.Group>
-        <Form.Label>Recipe Name</Form.Label>
-        <Form.Control
-          type="text"
-          name="recipe_name"
-          value={recipe_name}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      {errors?.recipe_name?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
-
-      <Form.Group>
-        <Form.Label>Description</Form.Label>
-        <Form.Control
-          as="textarea"
-          rows={6}
-          name="description"
-          value={description}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      {errors?.content?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
-
-      <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
-        onClick={() => history.goBack()}
-      >
-        cancel
-      </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
-        Create
-      </Button>
-    </div>
-  );
-
   const ingredientsFields = ingredients.map((ingredient, index) => (
     <div key={index} className={styles.IngredientRow}>
       <Form.Group>
@@ -202,6 +157,69 @@ function PostCreateForm() {
     </div>
   ));
 
+  const ingredientsSection = (
+    <Container className={appStyles.Content}>
+      <h5 className="text-center">Ingredients</h5>
+      {ingredientsFields}
+      <Button
+        className={`${btnStyles.Button} ${btnStyles.Blue}`}
+        onClick={handleAddIngredient}
+      > 
+        Add Ingredient
+      </Button>
+    </Container>
+  );
+
+  const textFields = (
+    <div className="text-center">
+      <Form.Group>
+        <Form.Label>Recipe Name</Form.Label>
+        <Form.Control
+          type="text"
+          name="recipe_name"
+          value={recipe_name}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      {errors?.recipe_name?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+      <Form.Group>
+        <Form.Label>Description</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={6}
+          name="description"
+          value={description}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      {errors?.content?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+       {/* Add ingredients section for smaller screens to be above the buttons */}
+      <div className="d-md-none mt-3">
+        {ingredientsSection}
+      </div>
+
+      <Button
+        className={`${btnStyles.Button} ${btnStyles.Blue}`}
+        onClick={() => history.goBack()}
+      >
+        cancel
+      </Button>
+      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
+        Create
+      </Button>
+    </div>
+  );
+
   return (
     <Form onSubmit={handleSubmit}>
       <Row>
@@ -250,21 +268,15 @@ function PostCreateForm() {
             ))}
 
             <div className="d-md-none">{textFields}</div>
+            
+            {/* Add ingredients section for larger screens */}
+            <div className="d-none d-md-block mt-3">
+              {ingredientsSection}
+            </div>
           </Container>
         </Col>
         <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
-          <Container className={appStyles.Content}>
-            {textFields}
-            <hr />
-            <h5 className="text-center">Ingredients</h5>
-            {ingredientsFields}
-            <Button
-              className={`${btnStyles.Button} ${btnStyles.Blue}`}
-              onClick={handleAddIngredient}
-            > 
-              Add Ingredient
-            </Button>
-          </Container>
+          <Container className={appStyles.Content}>{textFields}</Container>
         </Col>
       </Row>
     </Form>
