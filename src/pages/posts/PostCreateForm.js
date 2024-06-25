@@ -27,10 +27,9 @@ function PostCreateForm() {
     recipe_name: "",
     description: "",
     image: "",
-    ingredients: [],
   });
 
-  const { recipe_name, description, image, ingredients } = postData;
+  const { recipe_name, description, image, } = postData;
   const imageInput = useRef(null);
   const history = useHistory();
 
@@ -52,123 +51,30 @@ function PostCreateForm() {
     }
   };
 
-  const handleAddIngredient = () => {
-    const newIngredient = { name: '', quantity: '', measurement: ''};
-    setPostData({
-      ...postData,
-      ingredients: [...ingredients, newIngredient],
-    });
-  };
-
-  const handleIngredientChange = (index, event) => {
-    const updatedIngredients = [...ingredients];
-    updatedIngredients[index][event.target.name] = event.target.value;
-    setPostData({
-      ...postData,
-      ingredients: updatedIngredients,
-    });
-  };
-
-  const handleRemoveIngredient = (index) => {
-    const updatedIngredients= [...ingredients];
-    updatedIngredients.splice(index, 1);
-    setPostData({
-      ...postData,
-      ingredients: updatedIngredients,
-    });
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
     // Create FormData object for handling file upload
     const formData = new FormData();
     formData.append("recipe_name", recipe_name);
     formData.append("description", description);
-    formData.append("image", imageInput.current.files[0]);
-    formData.append("ingredients", JSON.stringify(ingredients)); // Ensure ingredients are stringified
+    
+    if (imageInput.current.files.length > 0) {
+      formData.append("image", imageInput.current.files[0]);
+    } else {
+      // If no image file is selected, append a default value for "image"
+      formData.append("image", ''); // Replace '' with the default image URL or default value
+    }
     
     try {
       const { data } = await axiosReq.post("/posts/", formData);
       history.push(`/posts/${data.id}`);
     } catch (err) {
-      if (err.response?.status === 400) {
-        // Handle validation errors from backend
+      // console.log(err);
+      if (err.response?.status !== 401) {
         setErrors(err.response?.data);
-      } else {
-        // Handle other errors
-        console.error("Error creating post:", err);
       }
     }
   };
-
-  const ingredientsFields = ingredients.map((ingredient, index) => (
-    <div key={index} className={styles.IngredientRow}>
-      <Form.Group>
-        <Form.Control
-          type="text"
-          name="name"
-          value={ingredient.name}
-          onChange={(e) => handleIngredientChange(index, e)}
-          placeholder="Ingredient Name"
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Control
-          type="text"
-          name="quantity"
-          value={ingredient.quantity}
-          onChange={(e) => handleIngredientChange(index, e)}
-          placeholder="Quantity"
-        />
-      </Form.Group>
-      <Form.Group>
-      <Form.Control
-          as="select"
-          name="measurement"
-          value={ingredient.measurement}
-          onChange={(e) => handleIngredientChange(index, e)}
-        >
-          <option value="">Select Measurement</option>
-          <option value="milliliter - ml">Milliliter - ml</option>
-          <option value="deciliter - dl">Deciliter - dl</option>
-          <option value="litre - l">Litre - l</option>
-          <option value="teaspoon - tsp">Teaspoon - tsp</option>
-          <option value="tablespoon - tbsp">Tablespoon - tbsp</option>
-          <option value="fluid ounce - fl oz">Fluid Ounce - fl oz</option>
-          <option value="cup - c">Cup - c</option>
-          <option value="pint - pt">Pint - pt</option>
-          <option value="quart - qt">Quart - qt</option>
-          <option value="gallon - gal">Gallon - gal</option>
-          <option value="milligram - mg">Milligram - mg</option>
-          <option value="gram - g">Gram - g</option>
-          <option value="kilogram - kg">Kilogram - kg</option>
-          <option value="pound - lb">Pound - lb</option>
-          <option value="ounce - oz">Ounce - oz</option>
-        </Form.Control>
-      </Form.Group>
-      <Button
-        variant="danger"
-        onClick={() => handleRemoveIngredient(index)}
-        className={styles.RemoveIngredientButton}
-      >
-        Remove
-      </Button>
-    </div>
-  ));
-
-  const ingredientsSection = (
-    <Container className={appStyles.Content}>
-      <h5 className="text-center">Ingredients</h5>
-      {ingredientsFields}
-      <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
-        onClick={handleAddIngredient}
-      > 
-        Add Ingredient
-      </Button>
-    </Container>
-  );
 
   const textFields = (
     <div className="text-center">
@@ -202,11 +108,6 @@ function PostCreateForm() {
           {message}
         </Alert>
       ))}
-
-       {/* Add ingredients section for smaller screens to be above the buttons */}
-      <div className="d-md-none mt-3">
-        {ingredientsSection}
-      </div>
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
@@ -266,13 +167,6 @@ function PostCreateForm() {
                 {message}
               </Alert>
             ))}
-
-            <div className="d-md-none">{textFields}</div>
-            
-            {/* Add ingredients section for larger screens */}
-            <div className="d-none d-md-block mt-3">
-              {ingredientsSection}
-            </div>
           </Container>
         </Col>
         <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">

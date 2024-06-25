@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from "../../styles/Post.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
@@ -17,7 +17,6 @@ const Post = (props) => {
     likes_count,
     like_id,
     recipe_name,
-    ingredients,
     description,
     image,
     updated_at,
@@ -28,10 +27,6 @@ const Post = (props) => {
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
-  const [showIngredients, setShowIngredients] = useState(false);
-
-  console.log('RECIPE: ', recipe_name)
-  console.log('PROPS: ', props)
 
   const handleEdit = () => {
     history.push(`/posts/${id}/edit`);
@@ -78,11 +73,6 @@ const Post = (props) => {
     }
   };
 
-  const toggleIngredients = () => {
-    setShowIngredients(!showIngredients);
-    console.log('INGREDIENTS: ', showIngredients)
-  };
-
   return (
     <Card className={styles.Post}>
       <Card.Body>
@@ -108,24 +98,6 @@ const Post = (props) => {
       <Card.Body>
         {recipe_name && <Card.Title className="text-center">{recipe_name}</Card.Title>}
         {description && <Card.Text>{description}</Card.Text>}
-
-        {/* Ingredients Dropdown */}
-        {ingredients && ingredients.length > 0 && (
-          <div className={styles.IngredientsDropdown}>
-            <button className={styles.ToggleButton} onClick={toggleIngredients}>
-              {showIngredients ? 'Hide Ingredients' : 'Show Ingredients'}
-            </button>
-            {showIngredients && (
-              <ul className={styles.IngredientsList}>
-                {ingredients.map((ingredient, index) => (
-                  <li key={index}>
-                    {ingredient.name}: {ingredient.quantity} {ingredient.measurement}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        )}
 
         <div className={styles.PostBar}>
           {is_owner ? (
