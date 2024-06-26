@@ -41,7 +41,7 @@
   }
   
   a:hover i {
-    color: #1c4e23;
+    color: #1da039;
     transition: color ease-in-out 0.3s;
   }
   
@@ -50,7 +50,7 @@
   }
   
   i {
-    color: #c9dac7;
+    color: #1c4e23;
     font-size: 1.6rem;
     padding: 7px;
     vertical-align: middle;
@@ -58,8 +58,7 @@
   
   i:hover {
     cursor: pointer;
-    transition: color ease-in-out 0.3s;
-    color: #1c4e23;
+    color: #1da039;
   }
   
   figure {

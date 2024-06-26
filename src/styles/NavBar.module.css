@@ -10,3 +10,7 @@
   .Active i {
     color: #46ff2e;
   }
+
+  a:hover {
+    color: #1da039;
+  }
