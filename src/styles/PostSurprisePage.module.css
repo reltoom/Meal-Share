@@ -1,0 +1,25 @@
+.SurpriseContainer {
+    display: flex;
+    flex-direction: column;
+    align-content:space-around;
+    height: 50vh;
+}
+
+.Clueless {  
+    width: 60%;
+    margin: auto;
+    padding: 20px;
+    font-size: 120%;
+}
+
+.SurpriseButton {
+    font-size: 200%;
+    background-color: #1da039;
+    text-transform: uppercase;
+    border:none
+}
+
+.SurpriseButton:hover {
+    background-color: #1c4e23;
+    color: #1da039;
+}

@@ -15,6 +15,7 @@ import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import NotFound from "./components/NotFound";
+import PostSurprisePage from "./pages/posts/PostSurprisePage";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -39,6 +40,15 @@ function App() {
               <PostsPage
                 message="No results found. Adjust the search keyword or follow a user."
                 filter={`owner__followed__owner__profile=${profile_id}&`}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/surprise"
+            render={() => (
+              <PostSurprisePage
+                message="Click the 'Suprise Me!' button to generate a meal."
               />
             )}
           />
