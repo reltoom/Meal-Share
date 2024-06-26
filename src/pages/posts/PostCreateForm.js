@@ -27,12 +27,12 @@ function PostCreateForm() {
     recipe_name: "",
     description: "",
     image: "",
+    ingredients: [{ name: "", quantity: "", measurement: "" }],
   });
 
-  const { recipe_name, description, image, } = postData;
+  const { recipe_name, description, image, ingredients } = postData;
   const imageInput = useRef(null);
   const history = useHistory();
-
 
   const handleChange = (event) => {
     setPostData({
@@ -51,25 +51,43 @@ function PostCreateForm() {
     }
   };
 
+  const handleIngredientChange = (index, event) => {
+    const newIngredients = ingredients.map((ingredient, i) => {
+      if (i === index) {
+        return { ...ingredient, [event.target.name]: event.target.value };
+      }
+      return ingredient;
+    });
+    setPostData({ ...postData, ingredients: newIngredients });
+  };
+
+  const handleAddIngredient = () => {
+    setPostData({
+      ...postData,
+      ingredients: [...ingredients, { name: "", quantity: "", measurement: "" }],
+    });
+  };
+
+  const handleRemoveIngredient = (index) => {
+    const newIngredients = ingredients.filter((_, i) => i !== index);
+    setPostData({ ...postData, ingredients: newIngredients });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // Create FormData object for handling file upload
     const formData = new FormData();
     formData.append("recipe_name", recipe_name);
     formData.append("description", description);
-    
+    formData.append("ingredients", JSON.stringify(ingredients));
     if (imageInput.current.files.length > 0) {
       formData.append("image", imageInput.current.files[0]);
     } else {
-      // If no image file is selected, append a default value for "image"
       formData.append("image", ''); // Replace '' with the default image URL or default value
     }
-    
     try {
       const { data } = await axiosReq.post("/posts/", formData);
       history.push(`/posts/${data.id}`);
     } catch (err) {
-      // console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }
@@ -92,7 +110,6 @@ function PostCreateForm() {
           {message}
         </Alert>
       ))}
-
       <Form.Group>
         <Form.Label>Description</Form.Label>
         <Form.Control
@@ -103,17 +120,86 @@ function PostCreateForm() {
           onChange={handleChange}
         />
       </Form.Group>
-      {errors?.content?.map((message, idx) => (
+      {errors?.description?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
       ))}
-
+      {ingredients.map((ingredient, index) => (
+        <div key={index} className="mb-3">
+          <Row>
+            <Col>
+              <Form.Group>
+                <Form.Label>Ingredient Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="name"
+                  value={ingredient.name}
+                  onChange={(e) => handleIngredientChange(index, e)}
+                />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group>
+                <Form.Label>Quantity</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="quantity"
+                  value={ingredient.quantity}
+                  onChange={(e) => handleIngredientChange(index, e)}
+                />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group>
+                <Form.Label>Measurement</Form.Label>
+                <Form.Control
+                  as="select"
+                  name="measurement"
+                  value={ingredient.measurement}
+                  onChange={(e) => handleIngredientChange(index, e)}
+                >
+                  <option value="milliliter - ml">Milliliter - ml</option>
+                  <option value="deciliter - dl">Deciliter - dl</option>
+                  <option value="litre - l">Litre - l</option>
+                  <option value="teaspoon - tsp">Teaspoon - tsp</option>
+                  <option value="tablespoon - tbsp">Tablespoon - tbsp</option>
+                  <option value="fluid ounce - fl oz">Fluid ounce - fl oz</option>
+                  <option value="cup - c">Cup - c</option>
+                  <option value="pint - pt">Pint - pt</option>
+                  <option value="quart - qt">Quart - qt</option>
+                  <option value="gallon - gal">Gallon - gal</option>
+                  <option value="milligram - mg">Milligram - mg</option>
+                  <option value="gram - g">Gram - g</option>
+                  <option value="kilogram - kg">Kilogram - kg</option>
+                  <option value="pound - lb">Pound - lb</option>
+                  <option value="ounce - oz">Ounce - oz</option>
+                  <option value="units">Units</option>
+                </Form.Control>
+              </Form.Group>
+            </Col>
+            <Col className="d-flex align-items-end">
+              <Button
+                variant="danger"
+                onClick={() => handleRemoveIngredient(index)}
+              >
+                Remove
+              </Button>
+            </Col>
+          </Row>
+        </div>
+      ))}
+      <Button
+        className={`${btnStyles.Button} ${btnStyles.Blue}`}
+        onClick={handleAddIngredient}
+      >
+        Add Ingredient
+      </Button>
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
         onClick={() => history.goBack()}
       >
-        cancel
+        Cancel
       </Button>
       <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
         Create
@@ -154,7 +240,6 @@ function PostCreateForm() {
                   />
                 </Form.Label>
               )}
-
               <Form.File
                 id="image-upload"
                 accept="image/*"
