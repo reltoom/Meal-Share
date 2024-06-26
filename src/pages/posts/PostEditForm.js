@@ -20,10 +20,13 @@ function PostEditForm() {
 
   const [postData, setPostData] = useState({
     recipe_name: "",
-    content: "",
+    description: "",
     image: "",
+    directions: "",
+    ingredients: "",
+    meals: "",
   });
-  const { recipe_name, content, image } = postData;
+  const { recipe_name, description, image, directions, ingredients, meals } = postData;
 
   const imageInput = useRef(null);
   const history = useHistory();
@@ -33,9 +36,9 @@ function PostEditForm() {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(`/posts/${id}/`);
-        const { recipe_name, content, image, is_owner } = data;
+        const { recipe_name, description, image, directions, ingredients, meals, is_owner } = data;
 
-        is_owner ? setPostData({ recipe_name, content, image }) : history.push("/");
+        is_owner ? setPostData({ recipe_name, description, image, directions, ingredients, meals }) : history.push("/");
       } catch (err) {
         // console.log(err);
       }
@@ -66,7 +69,10 @@ function PostEditForm() {
     const formData = new FormData();
 
     formData.append("recipe_name", recipe_name);
-    formData.append("content", content);
+    formData.append("description", description);
+    formData.append("directions", directions);
+    formData.append("ingredients", ingredients);
+    formData.append("meals", meals);
 
     if (imageInput?.current?.files[0]) {
       formData.append("image", imageInput.current.files[0]);
@@ -100,17 +106,72 @@ function PostEditForm() {
         </Alert>
       ))}
 
-      <Form.Group>
-        <Form.Label>Content</Form.Label>
+<Form.Group>
+        <Form.Label>Description</Form.Label>
         <Form.Control
           as="textarea"
           rows={6}
-          name="content"
-          value={content}
+          name="description"
+          value={description}
           onChange={handleChange}
         />
       </Form.Group>
-      {errors?.content?.map((message, idx) => (
+      {errors?.description?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+      <Form.Group>
+        <Form.Label>Directions</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={10}
+          name="directions"
+          value={directions}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      {errors?.directions?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+      <Form.Group>
+        <Form.Label>Ingredients</Form.Label>
+        <Form.Control
+          as="textarea"
+          rows={10}
+          name="ingredients"
+          value={ingredients}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      {errors?.ingredients?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+      <Form.Group>
+        <Form.Label>Meal Type</Form.Label>
+        <Form.Control
+          as="select"
+          name="meals"
+          value={meals}
+          onChange={handleChange}
+        >
+          <option value="breakfast">Breakfast</option>
+          <option value="lunch">Lunch</option>
+          <option value="dinner">Dinner</option>
+          <option value="appetizer">Appetizer</option>
+          <option value="dessert">Dessert</option>
+          <option value="snack">Snack</option>
+        </Form.Control>
+
+      </Form.Group>
+      {errors?.meals?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>

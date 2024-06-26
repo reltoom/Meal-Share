@@ -155,7 +155,6 @@ function PostCreateForm() {
           value={meals}
           onChange={handleChange}
         >
-          <option value="">Select Meal Type</option>
           <option value="breakfast">Breakfast</option>
           <option value="lunch">Lunch</option>
           <option value="dinner">Dinner</option>
