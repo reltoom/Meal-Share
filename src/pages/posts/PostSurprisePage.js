@@ -41,7 +41,7 @@ function SurprisePage() {
         <h1>Out of meal ideas?? Can't decide what to cook??</h1>
       </Container>
       <Container>
-        <Button onClick={handleSurprise} variant="primary" className={styles.SurpriseButton}>
+        <Button onClick={handleSurprise} className={styles.SurpriseButton}>
           Surprise Me!
         </Button>
       </Container>

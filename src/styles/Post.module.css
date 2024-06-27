@@ -22,3 +22,8 @@
   .HeartOutline:hover {
     color: #f85032;
   }
+
+.PostPage {
+  display:flex;
+  justify-content: center;
+}
