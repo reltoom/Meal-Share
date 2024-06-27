@@ -8,6 +8,7 @@ import NoResults from "../../assets/no-results.png";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import BookForm from './BookForm';
 
 function BooksPage({ message, filter = "" }) {
   const [books, setBooks] = useState({ results: [] });
@@ -34,6 +35,14 @@ function BooksPage({ message, filter = "" }) {
       clearTimeout(timer);
     };
   }, [filter, currentUser]);
+
+  const handleBookCreate = (newBook) => {
+    // Update books state after creating a new book
+    setBooks((prevBooks) => ({
+      ...prevBooks,
+      results: [newBook, ...prevBooks.results],
+    }));
+  };
 
   return (
     <Row className="h-100">
@@ -63,6 +72,15 @@ function BooksPage({ message, filter = "" }) {
           </Container>
         )}
       </Col>
+      {currentUser && (
+        <Col lg={4}>
+          <div className="py-2 p-lg-2">
+            <Container className={appStyles.Content}> {/* Ensure proper alignment with Bootstrap grid */}
+              <BookForm onSuccess={handleBookCreate} />
+            </Container>
+          </div>
+        </Col>
+      )}
     </Row>
   );
 }
