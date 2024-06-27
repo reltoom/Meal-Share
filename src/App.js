@@ -16,6 +16,7 @@ import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import NotFound from "./components/NotFound";
 import PostSurprisePage from "./pages/posts/PostSurprisePage";
+import BooksPage from "./pages/books/BooksPage";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -40,6 +41,15 @@ function App() {
               <PostsPage
                 message="No results found. Adjust the search keyword or follow a user."
                 filter={`owner__followed__owner__profile=${profile_id}&`}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/recipe-books"
+            render={() => (
+              <BooksPage
+                message="No on has upload a recipe book, be the first!"
               />
             )}
           />
