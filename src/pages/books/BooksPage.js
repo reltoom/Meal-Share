@@ -44,6 +44,13 @@ function BooksPage({ message, filter = "" }) {
     }));
   };
 
+  const handleBookDelete = (deletedBookId) => {
+    setBooks((prevBooks) => ({
+      ...prevBooks,
+      results: prevBooks.results.filter((book) => book.id !== deletedBookId),
+    }));
+  };
+
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
@@ -57,7 +64,11 @@ function BooksPage({ message, filter = "" }) {
                 loader={<Asset spinner />}
               >
                 {books.results.map((book) => (
-                  <Book key={book.id} {...book} /> // Pass all book properties
+                  <Book
+                  key={book.id}
+                  {...book}
+                  handleBookDelete={handleBookDelete}
+                  /> // Pass all book properties
                 ))}
               </InfiniteScroll>
             ) : (

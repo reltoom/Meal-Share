@@ -4,7 +4,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Link, useHistory } from 'react-router-dom';
 import Avatar from '../../components/Avatar';
 import styles from '../../styles/Book.module.css';
-import { MoreDropdown } from "../../components/MoreDropdown";
+import BookDropdown from './BookDropdown';
 import { axiosRes } from "../../api/axiosDefaults";
 
 const Book = (props) => {
@@ -16,7 +16,7 @@ const Book = (props) => {
     title,
     author,
     link,
-    postPage,
+    handleBookDelete,
   } = props;
 
   const currentUser = useCurrentUser();
@@ -30,7 +30,7 @@ const Book = (props) => {
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/books/${id}/`);
-      history.goBack();
+      handleBookDelete(id); // Call the delete handler to update state
     } catch (err) {
       console.error("Error deleting book:", err);
     }
@@ -48,10 +48,10 @@ const Book = (props) => {
             {owner}
           </Link>
           <div className="d-flex align-items-center">
-            {is_owner && postPage && (
-              <MoreDropdown
-                handleEdit={handleEdit}
-                handleDelete={handleDelete}
+          {is_owner && (
+              <BookDropdown
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
               />
             )}
           </div>
