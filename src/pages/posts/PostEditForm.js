@@ -106,7 +106,7 @@ function PostEditForm() {
         </Alert>
       ))}
 
-<Form.Group>
+      <Form.Group>
         <Form.Label>Description</Form.Label>
         <Form.Control
           as="textarea"
@@ -121,7 +121,11 @@ function PostEditForm() {
           {message}
         </Alert>
       ))}
+    </div>
+  );
 
+  const textAreas = (
+    <div className="text-center">
       <Form.Group>
         <Form.Label>Directions</Form.Label>
         <Form.Control
@@ -153,7 +157,11 @@ function PostEditForm() {
           {message}
         </Alert>
       ))}
+    </div>
+  );
 
+  const textFieldsTwo =(
+    <div>
       <Form.Group>
         <Form.Label>Meal Type</Form.Label>
         <Form.Control
@@ -169,25 +177,23 @@ function PostEditForm() {
           <option value="dessert">Dessert</option>
           <option value="snack">Snack</option>
         </Form.Control>
-
       </Form.Group>
       {errors?.meals?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
       ))}
-
       <Button
         className={`${btnStyles.Button} ${btnStyles.Green}`}
         onClick={() => history.goBack()}
       >
-        cancel
+        Cancel
       </Button>
       <Button className={`${btnStyles.Button} ${btnStyles.Green}`} type="submit">
-        save
+        Update
       </Button>
     </div>
-  );
+  )
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -225,8 +231,21 @@ function PostEditForm() {
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>
-        <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
+        <Col md={5} lg={4} className=" d-md-block p-0 p-md-2">
           <Container className={appStyles.Content}>{textFields}</Container>
+        </Col>
+      </Row>
+      <Row>
+        <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
+          <Container
+            className={`${appStyles.Content}
+            ${styles.Container}
+            d-flex flex-column justify-content-center`}>
+              {textAreas}
+          </Container>
+        </Col>
+        <Col md={5} lg={4} className=" d-md-block p-0 p-md-2">
+          <Container className={appStyles.Content}>{textFieldsTwo}</Container>
         </Col>
       </Row>
     </Form>

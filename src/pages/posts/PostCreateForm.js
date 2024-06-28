@@ -180,7 +180,7 @@ function PostCreateForm() {
         className={`${btnStyles.Button} ${btnStyles.Green}`}
         onClick={() => history.goBack()}
       >
-        cancel
+        Cancel
       </Button>
       <Button className={`${btnStyles.Button} ${btnStyles.Green}`} type="submit">
         Create
@@ -236,7 +236,7 @@ function PostCreateForm() {
             ))}
           </Container>
         </Col>
-        <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
+        <Col md={5} lg={4} className=" d-md-block p-0 p-md-2">
           <Container className={appStyles.Content}>{textFields}</Container>
         </Col>
       </Row>
@@ -249,7 +249,7 @@ function PostCreateForm() {
               {textAreas}
           </Container>
         </Col>
-        <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
+        <Col md={5} lg={4} className=" d-md-block p-0 p-md-2">
           <Container className={appStyles.Content}>{textFieldsTwo}</Container>
         </Col>
       </Row>
