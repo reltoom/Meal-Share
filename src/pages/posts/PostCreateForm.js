@@ -36,7 +36,6 @@ function PostCreateForm() {
   const imageInput = useRef(null);
   const history = useHistory();
 
-
   const handleChange = (event) => {
     setPostData({
       ...postData,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { axiosReq } from "../../api/axiosDefaults";
 import styles from '../../styles/BookForm.module.css';
@@ -8,6 +8,7 @@ const BookForm = ({ onSuccess, editMode = false, editBook = null, onCancel }) =>
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [link, setLink] = useState('');
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -25,24 +26,30 @@ const BookForm = ({ onSuccess, editMode = false, editBook = null, onCancel }) =>
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      let responseData;
       if (editMode && editBook) {
         await axiosReq.put(`/books/${editBook.id}/`, { title, author, link });
-        onSuccess({ ...editBook, title, author, link });
+        responseData = { ...editBook, title, author, link };
+        setShowSuccessMessage('updated');
       } else {
         const { data } = await axiosReq.post('/books/', { title, author, link });
-        onSuccess(data);
+        responseData = data;
+        setShowSuccessMessage('created');
         // Reset form fields after successful add
         setTitle('');
         setAuthor('');
         setLink('');
       }
+      onSuccess(responseData);
       // Redirect to books page after successful operation
-      history.push('/books');
+      setTimeout(() => {
+        setShowSuccessMessage(false);
+        history.push('/books');
+      }, 2000);
     } catch (error) {
       console.error('Error creating/updating book:', error);
     }
   };
-
 
   const handleCancel = () => {
     setTitle('');
@@ -55,6 +62,16 @@ const BookForm = ({ onSuccess, editMode = false, editBook = null, onCancel }) =>
 
   return (
     <Form onSubmit={handleSubmit} className={styles.BookForm}>
+      {showSuccessMessage === 'created' && (
+        <Alert variant="success" className="my-3">
+          Book successfully created!
+        </Alert>
+      )}
+      {showSuccessMessage === 'updated' && (
+        <Alert variant="success" className="my-3">
+          Book successfully updated!
+        </Alert>
+      )}
       <Form.Group controlId="formTitle">
         <Form.Label>Title</Form.Label>
         <Form.Control
