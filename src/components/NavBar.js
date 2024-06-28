@@ -46,21 +46,21 @@ const NavBar = () => {
         activeClassName={styles.Active}
         to="/books"
       >
-        <i className="fas fa-stream"></i>Recipe-Books
+        <i className="fas fa-book"></i>Recipe-Books
       </NavLink>
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
         to="/surprise"
       >
-        <i className="fas fa-stream"></i>Surprise Me
+        <i className="fas fa-mug-hot"></i>Surprise Me
       </NavLink>
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
         to="/feed"
       >
-        <i className="fas fa-stream"></i>Followed
+        <i className="fas fa-people-arrows"></i>Followed
       </NavLink>
       <NavLink
         className={styles.NavLink}
