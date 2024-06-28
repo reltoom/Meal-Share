@@ -114,7 +114,11 @@ function PostCreateForm() {
           {message}
         </Alert>
       ))}
+    </div>
+  );
 
+  const textAreas = (
+    <div className="text-center">
       <Form.Group>
         <Form.Label>Directions</Form.Label>
         <Form.Control
@@ -146,7 +150,11 @@ function PostCreateForm() {
           {message}
         </Alert>
       ))}
+    </div>
+  );
 
+  const textFieldsTwo =(
+    <div>
       <Form.Group>
         <Form.Label>Meal Type</Form.Label>
         <Form.Control
@@ -162,14 +170,12 @@ function PostCreateForm() {
           <option value="dessert">Dessert</option>
           <option value="snack">Snack</option>
         </Form.Control>
-
       </Form.Group>
       {errors?.meals?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
       ))}
-
       <Button
         className={`${btnStyles.Button} ${btnStyles.Green}`}
         onClick={() => history.goBack()}
@@ -180,7 +186,7 @@ function PostCreateForm() {
         Create
       </Button>
     </div>
-  );
+  )
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -232,6 +238,19 @@ function PostCreateForm() {
         </Col>
         <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
           <Container className={appStyles.Content}>{textFields}</Container>
+        </Col>
+      </Row>
+      <Row>
+        <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
+          <Container
+            className={`${appStyles.Content}
+            ${styles.Container}
+            d-flex flex-column justify-content-center`}>
+              {textAreas}
+          </Container>
+        </Col>
+        <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
+          <Container className={appStyles.Content}>{textFieldsTwo}</Container>
         </Col>
       </Row>
     </Form>
