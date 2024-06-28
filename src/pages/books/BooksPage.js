@@ -9,6 +9,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import BookForm from './BookForm';
+import styles from '../../styles/Book.module.css';
 
 function BooksPage({ message, filter = "" }) {
   const [books, setBooks] = useState({ results: [] });
@@ -110,7 +111,7 @@ function BooksPage({ message, filter = "" }) {
       {currentUser && (
         <Col lg={4}>
           <div className="py-2 p-lg-2">
-            <Container className={appStyles.Content}>
+            <Container className={styles.BookForm}>
             <BookForm
                 onSuccess={editMode ? handleEditSuccess : handleBookCreate}
                 editMode={editMode}

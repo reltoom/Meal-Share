@@ -1,0 +1,53 @@
+.Book {
+    border-color: #1c4e23;
+    border-width: 2px;
+    margin: 4px;
+}
+
+.BookBar {
+    background-color: #e2f0e1;
+}
+
+.BookForm {
+    border:2px solid #1c4e23;
+    background-color: #e2f0e1;
+    padding: 4px;
+    border-radius: 1%;
+}
+
+.BookButton {
+    background-color: #1da039;
+    color: #ffffff;
+    border: none;
+}
+
+.BookButton:hover {
+    background-color: #1c4e23;
+    color: #1da039;
+}
+
+.BookButton:active,
+.BookButton:focus {
+    background-color: #1da039 !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.BookCancel {
+    background-color: #e60a0a;
+    border: none;
+}
+
+.BookCancel:hover {
+    background-color: #ad0d0d;
+    color: #e60a0a;
+}
+
+.BookCancel:active,
+.BookCancel:focus {
+    background-color: #e60a0a !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+}

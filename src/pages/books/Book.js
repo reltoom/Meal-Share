@@ -45,7 +45,7 @@ const Book = ({
 
   return (
     <Card className={styles.Book}>
-      <Card.Body>
+      <Card.Body className={styles.BookBar}>
         <Media className="align-items-center justify-content-between">
           <Link to={`/profiles/${profile_id}`}>
             <Avatar src={profile_image} height={55} />

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { axiosReq } from "../../api/axiosDefaults";
-import styles from '../../styles/BookForm.module.css';
+import styles from '../../styles/Book.module.css';
+
 
 const BookForm = ({ onSuccess, editMode = false, editBook = null, onCancel }) => {
   const [title, setTitle] = useState('');
@@ -72,7 +73,7 @@ const BookForm = ({ onSuccess, editMode = false, editBook = null, onCancel }) =>
   };
 
   return (
-    <Form onSubmit={handleSubmit} className={styles.BookForm}>
+    <Form onSubmit={handleSubmit}>
       {showSuccessMessage === 'created' && (
         <Alert variant="success" className="my-3">
           Book successfully created!
@@ -117,11 +118,11 @@ const BookForm = ({ onSuccess, editMode = false, editBook = null, onCancel }) =>
           onChange={(e) => setLink(e.target.value)}
         />
       </Form.Group>
-      <Button type="submit" className="mr-2">
+      <Button type="submit" className={`mr-2 ${styles.BookButton}`}>
         {editMode ? 'Update Book' : 'Add Book'}
       </Button>
       {editMode && (
-        <Button variant="secondary" onClick={handleCancel}>
+        <Button variant="secondary" onClick={handleCancel} className={styles.BookCancel}>
           Cancel
         </Button>
       )}

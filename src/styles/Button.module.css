@@ -16,13 +16,13 @@
     background-color: #1da039;
   }
   
-  .Button:active {
-    background-color: #1da039;
-  }
-  
+  .Button:active,
   .Button:focus {
     background-color: #1da039;
+    border: none !important;
+    box-shadow: none !important;
   }
+  
 
   .Wide {
     padding: 10px 50px;
@@ -38,7 +38,6 @@
   
   .GreenOutline,
   .Green:hover {
-    /* border: 1px solid #2142b2; */
     background-color: #1c4e23;
     color: #1da039;
   }
