@@ -1,20 +1,27 @@
 .Form {
-    border: none;
-    border-bottom: 2px #46ff2e solid;
-  }
-  
-  .Button {
-    border: none;
-    background-color: #1da039;
-    color: rgb(255, 255, 255);
-    border-radius: 100px;
-    padding: 4px 10px;
-    min-width: 75px;
-    margin: 5px;
-  }
-  
-  .Button:hover {
-    cursor: pointer;
-    background-color: #1c4e23;
-    color: #1da039;
-  }
+  border: none;
+  border-bottom: 2px #f0e9e1 solid;
+}
+
+.Button {
+  background-color: #1da039;
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  border-radius: 10% !important;
+  margin-right: 3px;
+  margin-left: 3px;
+}
+
+.Button:hover {
+  background-color: #1c4e23;
+  color: #1da039;
+}
+
+.Button:active,
+.Button:focus {
+  background-color: #1da039 !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: none !important;
+}

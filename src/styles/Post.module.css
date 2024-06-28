@@ -4,6 +4,7 @@
     border-radius: 2px;
     margin-bottom: 16px;
     text-align: center;
+    border-radius: 1%;
   }
   
   .Post figure,
@@ -26,4 +27,8 @@
 .PostPage {
   display:flex;
   justify-content: center;
+}
+
+.PostBar {
+  background-color: #e2f0e1;
 }
