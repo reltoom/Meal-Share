@@ -13,6 +13,8 @@ import BookForm from './BookForm';
 function BooksPage({ message, filter = "" }) {
   const [books, setBooks] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [editBook, setEditBook] = useState(null);
   const currentUser = useCurrentUser();
 
   useEffect(() => {
@@ -51,6 +53,27 @@ function BooksPage({ message, filter = "" }) {
     }));
   };
 
+  const handleBookEdit = (book) => {
+    setEditBook(book);
+    setEditMode(true);
+  };
+
+  const handleEditSuccess = async () => {
+    try {
+      const { data } = await axiosReq.get(`/books/?${filter}`);
+      setBooks(data);
+    } catch (err) {
+      console.error("Error reloading books after edit:", err);
+    }
+    setEditMode(false);
+    setEditBook(null);
+  };
+
+  const handleCancelEdit = () => {
+    setEditMode(false);
+    setEditBook(null);
+  };
+
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
@@ -68,7 +91,8 @@ function BooksPage({ message, filter = "" }) {
                   key={book.id}
                   {...book}
                   handleBookDelete={handleBookDelete}
-                  /> // Pass all book properties
+                  handleBookEdit={handleBookEdit}
+                  />
                 ))}
               </InfiniteScroll>
             ) : (
@@ -86,8 +110,13 @@ function BooksPage({ message, filter = "" }) {
       {currentUser && (
         <Col lg={4}>
           <div className="py-2 p-lg-2">
-            <Container className={appStyles.Content}> {/* Ensure proper alignment with Bootstrap grid */}
-              <BookForm onSuccess={handleBookCreate} />
+            <Container className={appStyles.Content}>
+            <BookForm
+                onSuccess={editMode ? handleEditSuccess : handleBookCreate}
+                editMode={editMode}
+                editBook={editBook}
+                onCancel={handleCancelEdit}
+              />
             </Container>
           </div>
         </Col>

@@ -46,7 +46,7 @@ function App() {
           />
           <Route
             exact
-            path="/recipe-books"
+            path="/books"
             render={() => (
               <BooksPage
                 message="No on has upload a recipe book, be the first!"

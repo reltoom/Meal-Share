@@ -1,43 +1,47 @@
 import React from 'react';
 import { Card, Media } from 'react-bootstrap';
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Avatar from '../../components/Avatar';
 import styles from '../../styles/Book.module.css';
 import BookDropdown from './BookDropdown';
 import { axiosRes } from "../../api/axiosDefaults";
 
-const Book = (props) => {
-  const {
-    id,
-    owner,
-    profile_id,
-    profile_image,
-    title,
-    author,
-    link,
-    handleBookDelete,
-  } = props;
-
+const Book = ({
+  id,
+  owner,
+  profile_id,
+  profile_image,
+  title,
+  author,
+  link,
+  handleBookDelete,
+  handleBookEdit,
+}) => {
   const currentUser = useCurrentUser();
-  const is_owner = currentUser?.username === owner;
-  const history = useHistory();
 
   const handleEdit = () => {
-    history.push(`/books/${id}/edit`);
-  };
-
-  const handleDelete = async () => {
-    try {
-      await axiosRes.delete(`/books/${id}/`);
-      handleBookDelete(id); // Call the delete handler to update state
-    } catch (err) {
-      console.error("Error deleting book:", err);
+    if (currentUser) {
+      handleBookEdit({ id, title, author, link });
+    } else {
+      console.error("User is not authenticated or authorized to edit this book.");
     }
   };
 
-  console.log("Profile ID:", profile_id);
-  console.log("Profile Image:", profile_image);
+  const handleDelete = async () => {
+    if (window.confirm("Are you sure you want to delete this book?")) {
+      try {
+        await axiosRes.delete(`/books/${id}/`);
+        handleBookDelete(id); // Update UI state after successful deletion
+      } catch (err) {
+        console.error("Error deleting book:", err);
+        // Handle specific error cases, such as network errors or server issues
+        // Display a user-friendly error message or retry mechanism if needed
+      }
+    }
+  };
+
+  const isCurrentUserOwner = currentUser && currentUser.username === owner;
 
   return (
     <Card className={styles.Book}>
@@ -48,10 +52,10 @@ const Book = (props) => {
             {owner}
           </Link>
           <div className="d-flex align-items-center">
-          {is_owner && (
+            {isCurrentUserOwner && (
               <BookDropdown
-              handleEdit={handleEdit}
-              handleDelete={handleDelete}
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
               />
             )}
           </div>
