@@ -3,6 +3,9 @@
     flex-direction: column;
     align-content:space-around;
     height: 50vh;
+    background-color: #e2f0e1;
+    padding-bottom: 20px;
+    border-radius: 1%;
 }
 
 .Clueless {  
@@ -22,4 +25,12 @@
 .SurpriseButton:hover {
     background-color: #1c4e23;
     color: #1da039;
+}
+
+.SurpriseButton:active,
+.SurpriseButton:focus {
+    background-color: #1da039 !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
 }

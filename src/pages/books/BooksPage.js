@@ -110,7 +110,7 @@ function BooksPage({ message, filter = "" }) {
       </Col>
       {currentUser && (
         <Col lg={4}>
-          <div className="py-2 p-lg-2">
+          <div className={`py-2 p-lg-2 ${styles.BookFormOutline}`}>
             <Container className={styles.BookForm}>
             <BookForm
                 onSuccess={editMode ? handleEditSuccess : handleBookCreate}

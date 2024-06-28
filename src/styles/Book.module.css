@@ -1,16 +1,15 @@
 .Book {
-    border-color: #1c4e23;
-    border-width: 2px;
+    border-radius: 1%;
     margin: 4px;
 }
 
-.BookBar {
+.BookBar,
+.BookFormOutline {
     background-color: #e2f0e1;
+    border-radius: 1%;
 }
 
 .BookForm {
-    border:2px solid #1c4e23;
-    background-color: #e2f0e1;
     padding: 4px;
     border-radius: 1%;
 }
