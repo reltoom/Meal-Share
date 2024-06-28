@@ -9,13 +9,14 @@ const BookForm = ({ onSuccess, editMode = false, editBook = null, onCancel }) =>
   const [author, setAuthor] = useState('');
   const [link, setLink] = useState('');
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const history = useHistory();
 
   useEffect(() => {
     if (editMode && editBook) {
       setTitle(editBook.title);
       setAuthor(editBook.author);
-      setLink(editBook.link);
+      setLink(editBook.link || '');
     } else {
       setTitle('');
       setAuthor('');
@@ -26,13 +27,20 @@ const BookForm = ({ onSuccess, editMode = false, editBook = null, onCancel }) =>
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      if (!title || !author) {
+        setErrorMessage('Title and Author are required.');
+        return;
+      }
+  
       let responseData;
       if (editMode && editBook) {
-        await axiosReq.put(`/books/${editBook.id}/`, { title, author, link });
+        // Update existing book
+        await axiosReq.put(`/books/${editBook.id}/`, { title, author, link: link.trim() || null });
         responseData = { ...editBook, title, author, link };
         setShowSuccessMessage('updated');
       } else {
-        const { data } = await axiosReq.post('/books/', { title, author, link });
+        // Create new book
+        const { data } = await axiosReq.post('/books/', { title, author, link: link.trim() || null });
         responseData = data;
         setShowSuccessMessage('created');
         // Reset form fields after successful add
@@ -40,14 +48,17 @@ const BookForm = ({ onSuccess, editMode = false, editBook = null, onCancel }) =>
         setAuthor('');
         setLink('');
       }
+  
       onSuccess(responseData);
       // Redirect to books page after successful operation
       setTimeout(() => {
         setShowSuccessMessage(false);
+        setErrorMessage('');
         history.push('/books');
       }, 2000);
     } catch (error) {
       console.error('Error creating/updating book:', error);
+      setErrorMessage('Error creating/updating book. Please try again.');
     }
   };
 
@@ -72,6 +83,11 @@ const BookForm = ({ onSuccess, editMode = false, editBook = null, onCancel }) =>
           Book successfully updated!
         </Alert>
       )}
+      {errorMessage && (
+        <Alert variant="danger" className="my-3">
+          {errorMessage}
+        </Alert>
+      )}
       <Form.Group controlId="formTitle">
         <Form.Label>Title</Form.Label>
         <Form.Control
@@ -93,7 +109,7 @@ const BookForm = ({ onSuccess, editMode = false, editBook = null, onCancel }) =>
         />
       </Form.Group>
       <Form.Group controlId="formLink">
-        <Form.Label>Link</Form.Label>
+        <Form.Label>Link (Optional)</Form.Label>
         <Form.Control
           type="text"
           placeholder="Enter link"

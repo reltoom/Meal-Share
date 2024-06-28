@@ -65,9 +65,9 @@ const Book = ({
         <Card.Title className="text-center">Title: {title}</Card.Title>
         <Card.Text className="text-center">Author: {author}</Card.Text>
         <Card.Text className="text-center">
-          <a href={link} target="_blank" rel="noopener noreferrer">
-            Link: {link.length > 40 ? `${link.slice(0, 40)}...` : link}
-          </a>
+        <a href={link ? link : '#'} target="_blank" rel="noopener noreferrer">
+          Link: {link && link.length > 40 ? `${link.slice(0, 40)}...` : link}
+        </a>
         </Card.Text>
       </Card.Body>
     </Card>
