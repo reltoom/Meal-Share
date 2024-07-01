@@ -1,70 +1,131 @@
-# Getting Started with Create React App
+# Meal Share React Front-End
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is my Front-End for my PP5, Meal Share. 
 
-## Available Scripts
+Visit the live deployed site here: [Meal Share](https://meal-share-b5f074a2fcfd.herokuapp.com/).
 
-In the project directory, you can run:
+## CONTENTS
 
-### `npm start`
+* [User Experience](#user-experience-ux)
+  * [User Stories](#user-stories)
+  * [Planning Process](#planning-process)
+* [Design](#design)
+  * [Colour Scheme](#colour-scheme)
+  * [Future Implementations](#future-implementations)
+* [Features](#features)
+* [Technologies](#technologies)
+  * [Languages](#languages)
+  * [Websites & Programs](#websites-programs)
+* [Deployment](#deployment)
+* [Testing](#testing)
+   * [Manual Testing](#manual-testing)
+   * [Validator Test](#validator-test)
+* [Credits](#credits)
+  * [Code Used](#code-used)
+  * [Acknowledgments](#acknowledgments)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## User Experience
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### User Stories
 
-### `npm test`
+### Planning Process
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Design
 
-### `npm run build`
+### Colour Scheme
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Future Implementations
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Technologies 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Languages
+* React with JSX - for site funcitionality and resuablity.
+* HTML5 - Provides the content and structure for the Meal Share.
+* CSS - Provides the styling for the Character Share.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+###  Websites & Programs 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* [DjangoREST framework](https://www.django-rest-framework.org/)Guide and reference for code.
+* [Github](https://github.com/) - Created repository and stored files here after commits. 
+* [Heroku](https://heroku.com/) - For deploying both the Back-End and Front-End of Meal Share.
+* [Microsoft Visual Studio](https://visualstudio.microsoft.com/) - Wrote code and did commits to Github from here.
+* [W3 School](https://www.w3schools.com/) Read and used as a guide for some code.
+* [Chatgpt](https://chat.openai.com/) - Used to help identify problems in code and possible way to solve them.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Deployment 
+Here I will describe the deployment procedure for the Front-End of Meal Share.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. In your Github create a new repo instead of using the CI template as normal.
+    * Go to your Repos page and click the green 'new' repo button.
+    * Choose a unique name(Meal Share in this case) and scroll to bottom of page and click 'Create'.
+2. Setting up React.
+    * Open your workspace for the new repo in with the platform you use.
+    * In the terminal create your React app with: "npx create-react-app . --use-npm".
+    * This will install all needed packages for React.
+    * Save your workspace, add, commit and push to GitHub.
+3. Deploying in Heroku.
+    * Log into your Heroku account and go to the Dashboard.
+    * Click 'New' --- 'Create new app'
+    * Choose a unique name for your app and your region, then click 'Create App'.
+    * You do not need any Config Vars here. To connect this with your Back-End, you need the add the CLIENT_ORIGIN to Config Vars on the Back-End Heroku,with the value of your deployed front-end Heroku URL address. Then create an api folder with axiosDefualt.js in your 'src' directory. In this file add: 'axios.defaults.baseURL = "..."' with the ... being your Back-End URL from Heroku.
+    * Go the the Deploy tab and under Deployement Method, click to connect to your Github account.
+    * Search for you repo that you created in step 1 and then 'Connect'
+    * Click the 'Manual Deploy' to deploy manually after every update on GitHub, or you can activate the 'Automatic Deployement' which will try to deploy after every new push to GitHub.
+    * Now that it is deployed, you can click on the 'Open App' button in the top right hand off the screen in Heroku.
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+#### How to Fork in Github
 
-### Making a Progressive Web App
+If you want to fork this repository in Github:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. Go to the repository for this project [Meal-Share](https://github.com/reltoom/Meal-Share).
+2. In the upper right hand area of the screen, click the 'Fork' button.
+3. Then when the menu drops down, click 'Create New Fork'. (If you are the owner of a repository, you cannot fork.) 
 
-### Advanced Configuration
+#### How to Clone in Github
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+If you want to clone this repository:
 
-### Deployment
+1. Go to the repository for this project [Meal-Share](https://github.com/reltoom/Meal-Share).
+3. Click on the green 'Code' button and then select how you would like to clone: HTTPS, SSH or GitHub CLI (under the 'local' tab). 
+4. Either copy the desired code or click to open with another program from the list below the code.
+4. Open your code editor and go to 'Clone Repository' usually under 'File'.
+5. Paste if your code and then 'Clone'.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Testing
+## Manual Testing
 
-### `npm run build` fails to minify
+| | |
+|:-------:|:--------|
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Validator Test
+
+[Pep8 Python Validator](https://pep8ci.herokuapp.com/) is used to validate Character Share python code.
+
+[W3C](https://validator.w3.org/) is used to validate the HTML for Character Share, there are no errors. 1 warning about article lacking heading on the About page.
+
+[JShint](https://jshint.com/) is used to validate the Javascript for Character Share. No errors.
+
+## Credits
+
+### Code Used
+I used the Back-End code from the Moments walkthrough and then changed it to fit Meal Share. 
+
+### Acknowledgments
+Thank you to my daughter and wife for helping support me through my studies.
