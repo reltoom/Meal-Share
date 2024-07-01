@@ -19,7 +19,6 @@ const BookDropdown = ({ handleEdit, handleDelete }) => {
   return (
     <Dropdown className="ml-auto" drop="left">
       <Dropdown.Toggle as={ThreeDots} />
-
       <Dropdown.Menu
         className="text-center"
         popperConfig={{ strategy: 'fixed' }}

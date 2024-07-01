@@ -203,7 +203,7 @@ This is included in a separate file [here](testing.md).
 ## Validator Test
 
 * [W3C](https://validator.w3.org/nu/) is used to validate the HTML for Meal Share, there are no errors. 
-* [JShint](https://jshint.com/) is used to check the JSX code for Meal Share. Mostly refererences to ES6, but no errors.
+* [ESlint](https://eslint.org/play/) is used to check the JSX code for Meal Share. Shows parsing error for '<' after the return, but does not affect functionality.
 
 ## Credits
 
