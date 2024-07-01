@@ -16,6 +16,7 @@ Visit the live deployed site here: [Meal Share](https://meal-share-b5f074a2fcfd.
   * [Future Implementations](#future-implementations)
 * [Features](#features)
 * [Technologies](#technologies)
+  * [Libraries](#front-end-libraries-used)
   * [Languages](#languages)
   * [Websites & Programs](#websites-programs)
 * [Deployment](#deployment)
@@ -57,6 +58,87 @@ In the future I would like to incorporate sevearl ideas.
   * A Week's Favorite Recipe page where the Recipe which in the last 7 days has received most likes if showcased!
 
 ## Technologies 
+
+### Front-End Libraries Used
+<details><summary><b>Libraries and descriptions<b></summary>
+**1. React**
+
+**Feature**: Component-Based Architecture 
+
+**Justification**: React allows for efficient updates and rendering of components, which is essential for building dynamic and responsive user interfaces.
+
+**2. React DOM**
+
+**Feature**: DOM Rendering  
+
+**Justification**: React DOM serves as the entry point to the DOM for React, enabling the creation of dynamic web applications.
+
+**3. React Router DOM**
+
+**Feature**: Navigation and Routing  
+
+**Justification**: React Router DOM offers a powerful and flexible way to manage navigation and routing in a React application, ensuring seamless transitions between views.
+
+**4. Axios**
+
+**Feature**: HTTP Requests 
+
+**Justification**: Axios simplifies making HTTP requests and handling responses, including support for promise-based asynchronous operations.
+
+**5. Bootstrap**
+
+**Feature**: CSS Framework  
+
+**Justification**: Bootstrap provides a responsive grid system, prebuilt components, and powerful plugins built on jQuery.
+
+**6. React Bootstrap**
+
+**Feature**: Bootstrap Components  
+
+**Justification**: React Bootstrap replaces the Bootstrap JavaScript with React components, providing more control over each component.
+
+**7. React Infinite Scroll Component**
+
+**Feature**: Infinite Scrolling  
+
+**Justification**: This library simplifies the implementation of infinite scrolling functionality in a React application.
+
+**8. JWT Decode**
+
+**Feature**: JWT Decoding  
+
+**Justification**: JWT Decode allows easy decoding of JSON Web Tokens, which is essential for handling authentication tokens.
+
+**9. @testing-library/react**
+
+**Feature**: Testing Utilities  
+
+**Justification**: This library provides utilities to test React components, promoting good testing practices.
+
+**10. @testing-library/jest-dom**
+
+**Feature**: Custom Jest Matchers  
+
+**Justification**: It provides custom jest matchers for asserting on DOM nodes, improving the readability and expressiveness of tests.
+
+**11. @testing-library/user-event**
+
+**Feature**: User Event Simulation  
+
+**Justification**: This library allows simulation of user events in tests, providing more accurate and comprehensive test coverage.
+
+**12. Web Vitals**
+
+**Feature**: Performance Metrics  
+
+**Justification**: Web Vitals is a tiny library for measuring essential metrics to ensure the quality of a web application.
+
+**13. MSW (Mock Service Worker)**
+
+**Feature**: API Mocking  
+
+**Justification**: MSW allows for easy and powerful API mocking, which is essential for testing and development purposes.
+</details><br/>
 
 ### Languages
 * React with JSX - for site funcitionality and resuablity.
