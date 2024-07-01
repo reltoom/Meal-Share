@@ -50,3 +50,10 @@
     border: none !important;
     box-shadow: none !important;
 }
+
+.Share {
+    text-align: center;
+    background-color: #e2f0e1;
+    border-radius: 1%;
+    margin: 4px;
+}
