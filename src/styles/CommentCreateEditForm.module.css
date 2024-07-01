@@ -25,3 +25,21 @@
   border: none !important;
   box-shadow: none !important;
 }
+
+.ButtonCancel {
+  background-color: #e60a0a;
+  border: none;
+}
+
+.ButtonCancel:hover {
+  background-color: #ad0d0d;
+  color: #e60a0a;
+}
+
+.ButtonCancel:active,
+.ButtonCancel:focus {
+  background-color: #e60a0a !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: none !important;
+}
