@@ -97,23 +97,24 @@ If you want to clone this repository:
 
 ## Testing
 ## Manual Testing
-
-| | |
-|:-------:|:--------|
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
+I did manual testing for Meal Share.
+| | | |
+|:-------:|:--------|:--------|
+| Clicking on 'Sign up' takes me to a sign up page | Clicked on sign up | Took me to a signup form. |
+| Can I leave form blank | Tried to create with blank fields | Error messages show that I need to fill in fields |
+| Testing all fields in sign up form | Tried not matching passwords, or just blank spaces | Error messages still show that I need to fill in fields or that passwords do not match |
+| Clicking 'Sign up' will create an account | Clicked on Sign up after filling fields | System created an account and took me to the sign in page |
+| Clicking on 'Sign in' takes me to a sign in page | Clicked on sign in | Took me to sign in form |
+| Can I leave form blank, sign in | Tried to sign in with blank fields | Error messages show that I need to fill in fields |
+| Testing all fields in sign in form | Tried with wrong password and wrong username | Error messages show that I need to fill in fields or that I have wrong username or password |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
+|  |  |  |
 
 
 ## Validator Test
-
-[Pep8 Python Validator](https://pep8ci.herokuapp.com/) is used to validate Character Share python code.
 
 [W3C](https://validator.w3.org/) is used to validate the HTML for Character Share, there are no errors. 1 warning about article lacking heading on the About page.
 
