@@ -45,9 +45,7 @@ function CommentCreateForm(props) {
     } catch (err) {
       // console.log(err);
     }
-  };
-
-  
+  };  
 
   return (
     <>

@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -7,11 +6,9 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import Image from "react-bootstrap/Image";
-
 import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-
 import { useHistory, useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 
@@ -26,8 +23,8 @@ function PostEditForm() {
     ingredients: "",
     meals: "",
   });
-  const { recipe_name, description, image, directions, ingredients, meals } = postData;
 
+  const { recipe_name, description, image, directions, ingredients, meals } = postData;
   const imageInput = useRef(null);
   const history = useHistory();
   const { id } = useParams();
@@ -43,7 +40,6 @@ function PostEditForm() {
         // console.log(err);
       }
     };
-
     handleMount();
   }, [history, id]);
 
@@ -77,7 +73,6 @@ function PostEditForm() {
     if (imageInput?.current?.files[0]) {
       formData.append("image", imageInput.current.files[0]);
     }
-
     try {
       await axiosReq.put(`/posts/${id}/`, formData);
       history.push(`/posts/${id}`);
@@ -105,7 +100,6 @@ function PostEditForm() {
           {message}
         </Alert>
       ))}
-
       <Form.Group>
         <Form.Label>Description</Form.Label>
         <Form.Control
@@ -141,7 +135,6 @@ function PostEditForm() {
           {message}
         </Alert>
       ))}
-
       <Form.Group>
         <Form.Label>Ingredients</Form.Label>
         <Form.Control
@@ -214,7 +207,6 @@ function PostEditForm() {
                   Change the image
                 </Form.Label>
               </div>
-
               <Form.File
                 id="image-upload"
                 accept="image/*"
@@ -227,7 +219,6 @@ function PostEditForm() {
                 {message}
               </Alert>
             ))}
-
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>

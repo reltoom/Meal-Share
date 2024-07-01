@@ -19,7 +19,6 @@ const Book = ({
   handleBookEdit,
 }) => {
   const currentUser = useCurrentUser();
-
   const handleEdit = () => {
     if (currentUser) {
       handleBookEdit({ id, title, author, link });

@@ -104,14 +104,12 @@ const Post = (props) => {
         {recipe_name && <Card.Title className="text-center">{recipe_name}</Card.Title>}
         {meals && <Card.Text>{meals}</Card.Text>}
         {description && <Card.Text>{description}</Card.Text>}
-
         {postPage && (
           <>
             {ingredients && <Card.Text>Ingredients: {ingredients}</Card.Text>}
             {directions && <Card.Text>Directions: {directions}</Card.Text>}
           </>
         )}
-
         <div className={styles.PostBar}>
           {is_owner ? (
             <OverlayTrigger

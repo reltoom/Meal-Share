@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import { axiosReq } from "../../api/axiosDefaults";
 import styles from '../../styles/Book.module.css';
 
-
 const BookForm = ({ onSuccess, editMode = false, editBook = null, onCancel }) => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');

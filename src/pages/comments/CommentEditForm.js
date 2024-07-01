@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-
 import Form from "react-bootstrap/Form";
 import { axiosRes } from "../../api/axiosDefaults";
-
 import styles from "../../styles/CommentCreateEditForm.module.css";
 
 function CommentEditForm(props) {
   const { id, content, setShowEditForm, setComments } = props;
-
   const [formContent, setFormContent] = useState(content);
 
   const handleChange = (event) => {
@@ -50,7 +47,6 @@ function CommentEditForm(props) {
         />
       </Form.Group>
       <div className="text-right">
-        
         <button
           className={styles.Button}
           disabled={!content.trim()}

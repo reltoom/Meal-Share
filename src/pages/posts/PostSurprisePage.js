@@ -5,9 +5,6 @@ import Container from "react-bootstrap/Container";
 import { axiosReq } from "../../api/axiosDefaults";
 import styles from "../../styles/PostSurprisePage.module.css";
 
-
-
-
 function SurprisePage() {
   const history = useHistory();
 
@@ -15,15 +12,12 @@ function SurprisePage() {
     try {
       // Fetch the list of posts
       const { data } = await axiosReq.get(`/posts/`);
-      
       // Get the list of post results
       const posts = data.results;
-      
       // Check if there are any posts
       if (posts.length > 0) {
         // Select a random post
         const randomPost = posts[Math.floor(Math.random() * posts.length)];
-        
         // Navigate to the selected post's detail page
         history.push(`/posts/${randomPost.id}`);
       } else {
