@@ -41,7 +41,7 @@ const SignUpForm = () => {
     event.preventDefault();
     try {
       await axios.post("/dj-rest-auth/registration/", signUpData);
-      history.push("/signin");
+      history.push("/signin?message=Account created, please sign in");
     } catch (err) {
       setErrors(err.response?.data);
     }
