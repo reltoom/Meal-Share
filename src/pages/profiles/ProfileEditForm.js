@@ -102,7 +102,7 @@ const ProfileEditForm = () => {
         </Alert>
       ))}
       <Button
-        className={`${btnStyles.Button} ${btnStyles.Green}`}
+        className={`${btnStyles.Button} ${btnStyles.ButtonCancel}`}
         onClick={() => history.goBack()}
       >
         cancel

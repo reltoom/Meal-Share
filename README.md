@@ -77,9 +77,6 @@ Here I will describe the deployment procedure for the Front-End of Meal Share.
     * Click the 'Manual Deploy' to deploy manually after every update on GitHub, or you can activate the 'Automatic Deployement' which will try to deploy after every new push to GitHub.
     * Now that it is deployed, you can click on the 'Open App' button in the top right hand off the screen in Heroku.
 
-
-
-
 #### How to Fork in Github
 
 If you want to fork this repository in Github:
