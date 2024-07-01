@@ -3,12 +3,14 @@
 This is my Front-End for my PP5, Meal Share. 
 
 Visit the live deployed site here: [Meal Share](https://meal-share-b5f074a2fcfd.herokuapp.com/).
+![Am I Responsive Screenshot](./src/assets/readme/images/responsive.png)
 
 ## CONTENTS
 
 * [User Experience](#user-experience-ux)
-  * [User Stories](#user-stories)
+  * [Site Goals](#site-goals)
   * [Planning Process](#planning-process)
+  * [User Stories](#user-stories)
 * [Design](#design)
   * [Colour Scheme](#colour-scheme)
   * [Future Implementations](#future-implementations)
@@ -25,17 +27,30 @@ Visit the live deployed site here: [Meal Share](https://meal-share-b5f074a2fcfd.
   * [Acknowledgments](#acknowledgments)
 
 ## User Experience
+### Site Goals
+Meal Share is to be a site for all types of food lovers to come and share their favorite recipes and recipe books. Here user can interact with others: comment, like and follow each other and posts. If you are stuck on what to cook for dinner again... go to the Surprise me page and it will choose a random Post/Recipe for you. 
+### Planning Process
+Meal Share follows the Moments walkthrough structure, but is customized to be something different. Baslamiq was used to create original wireframes.
+
+![Wireframes](./src/assets/readme/images/wireframes.png)
+
+I wanted a more complex form for Post creation. Originally I had planned to do a nested serializer and spent several days trying to get it to work, but as I was told by a tutor eventually that nested serilizers were not supported by DRF, atleast how I was trying. Custom code would have been only workaround. So I had to start over and add on simple. After that I added on the Book page for recommend recipe books as that is another way to help people discover cooking ideas.
 
 ### User Stories
-
-### Planning Process
 
 ## Design
 
 ### Colour Scheme
+I choose shades of green for my color scheme because green is fresh. The background had to be dialed back and so I went with Ash gray, as it has a slight hint of green but light enough to not be overpowering. To highlight certain area of content, I went with a lighter version of Ash gray and used Honeydew. I decided to go with Red Cancel buttons so user is fast aware that something will not happen with those buttons and are easily differentiated from the Green Add/Save buttons.
+
+![Wireframes](./src/assets/readme/images/colors.png)
 
 ### Future Implementations
-
+In the future I would like to incorporate sevearl ideas.
+  * Nested serializers--Ingredients section would have its own creation area within a create Post. User could add and remove ingredients, write quantity from a integer field, write ingredient name from a text field and choose a measurement from the select menu. 
+  * Users will be able to select more than one Meal Type if they so wish.
+  * Surprise page will have a filter for liked, followed, or chosen meal types.
+  * In the profile page, the user would get a notification if someone has commented on their post.
 
 
 ## Technologies 
@@ -102,14 +117,13 @@ This is included in a separate file [here](testing.md).
 
 ## Validator Test
 
-[W3C](https://validator.w3.org/) is used to validate the HTML for Character Share, there are no errors. 1 warning about article lacking heading on the About page.
-
-[JShint](https://jshint.com/) is used to validate the Javascript for Character Share. No errors.
+[W3C](https://validator.w3.org/nu/) is used to validate the HTML for Meal Share, there are no errors. 
+[JShint](https://jshint.com/) is used to check the JSX code for Meal Share. Mostly refererences to ES6, but no errors.
 
 ## Credits
 
 ### Code Used
-I used the Back-End code from the Moments walkthrough and then changed it to fit Meal Share. 
+I used the basic set up from the Momements walkthrough and then have revised and edited to become Meal share. 
 
 ### Acknowledgments
 Thank you to my daughter and wife for helping support me through my studies.
