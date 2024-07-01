@@ -39,6 +39,9 @@ I wanted a more complex form for Post creation. Originally I had planned to do a
 ### User Stories
 
 ## Design
+Two fonts were used for Meal Share.
+  * [Salsa](https://fonts.google.com/specimen/Salsa?preview.text=Recipe%20Books) for all headings buttons and most text.
+  * [DM Sans](https://fonts.google.com/specimen/DM+Sans?preview.text=Recipe%20Books&query=dm+sans) For the Posts themselves as these can contain quite a bit of text that might be hard to read otherwise.
 
 ### Colour Scheme
 I choose shades of green for my color scheme because green is fresh. The background had to be dialed back and so I went with Ash gray, as it has a slight hint of green but light enough to not be overpowering. To highlight certain area of content, I went with a lighter version of Ash gray and used Honeydew. I decided to go with Red Cancel buttons so user is fast aware that something will not happen with those buttons and are easily differentiated from the Green Add/Save buttons.
@@ -51,7 +54,7 @@ In the future I would like to incorporate sevearl ideas.
   * Users will be able to select more than one Meal Type if they so wish.
   * Surprise page will have a filter for liked, followed, or chosen meal types.
   * In the profile page, the user would get a notification if someone has commented on their post.
-
+  * A Week's Favorite Recipe page where the Recipe which in the last 7 days has received most likes if showcased!
 
 ## Technologies 
 
@@ -117,13 +120,13 @@ This is included in a separate file [here](testing.md).
 
 ## Validator Test
 
-[W3C](https://validator.w3.org/nu/) is used to validate the HTML for Meal Share, there are no errors. 
-[JShint](https://jshint.com/) is used to check the JSX code for Meal Share. Mostly refererences to ES6, but no errors.
+* [W3C](https://validator.w3.org/nu/) is used to validate the HTML for Meal Share, there are no errors. 
+* [JShint](https://jshint.com/) is used to check the JSX code for Meal Share. Mostly refererences to ES6, but no errors.
 
 ## Credits
 
 ### Code Used
-I used the basic set up from the Momements walkthrough and then have revised and edited to become Meal share. 
+I used the set up from the Momements walkthrough and then have revised and edited it to become Meal Share. 
 
 ### Acknowledgments
 Thank you to my daughter and wife for helping support me through my studies.
